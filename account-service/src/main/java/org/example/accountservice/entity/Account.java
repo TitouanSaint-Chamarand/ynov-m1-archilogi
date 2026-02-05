@@ -65,4 +65,7 @@ public class Account {
     public void setNb_card(Integer nb_card) {
         this.nb_card = nb_card;
     }
+    public void addNbCard(){
+        nb_card++;
+    }
 }

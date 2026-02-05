@@ -54,6 +54,10 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.save(account);
     }
 
+    public void addNbCard(){
+        accountRepository.
+    }
+
     public void deleteAccount(Long id) {
         accountKafkaProducer.sendAccountDelete(id);
         accountRepository.deleteById(id);

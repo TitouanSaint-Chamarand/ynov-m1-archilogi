@@ -3,6 +3,7 @@ package org.example.cardservice.service.impl;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.example.cardservice.entity.Card;
+import org.example.cardservice.kafka.CardKafkaProducer;
 import org.example.cardservice.repository.CardRepository;
 import org.example.cardservice.rest.AccountServiceClient;
 import org.example.cardservice.service.CardService;
@@ -22,6 +23,9 @@ public class CardServiceImpl implements CardService {
     @Autowired
     private AccountServiceClient accountServiceClient;
 
+    @Autowired
+    private CardKafkaProducer cardKafkaProducer;
+
     public List<Card> getAllCards() {
         return cardRepository.findAll();
     }
@@ -36,6 +40,7 @@ public class CardServiceImpl implements CardService {
 
     public Card saveCard(Card card) {
         if (accountServiceClient.accountExists(card.getAccountId())) {
+            cardKafkaProducer.sendCardCreated(card.getAccountId());
             return cardRepository.save(card);
         } else {
             throw new IllegalArgumentException("Account does not exist");
@@ -46,9 +51,11 @@ public class CardServiceImpl implements CardService {
         cardRepository.deleteById(id);
     }
 
+
     @Transactional
     public void deleteCardByAccountId(Long accountId) {
         log.info("Deleting card by account id {}", accountId);
         cardRepository.deleteByAccountId(accountId);
     }
+
 }
