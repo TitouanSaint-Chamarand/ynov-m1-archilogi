@@ -4,9 +4,9 @@ import org.example.accountservice.entity.Account;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface AccountRepository extends JpaRepository<Account, Long> {
-    public default void addNbCard(Account account){
-
-    };
+    List<Account> getAccountById(Long id);
 }

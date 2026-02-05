@@ -54,8 +54,10 @@ public class AccountServiceImpl implements AccountService {
         return accountRepository.save(account);
     }
 
-    public void addNbCard(){
-        accountRepository.
+    public void addNbCard(Long accountId) {
+        Account nbCard = accountRepository.getAccountById(accountId);
+        nbCard.setNb_card(nbCard.getNb_card() + 1);
+        accountRepository.save(nbCard);
     }
 
     public void deleteAccount(Long id) {
