@@ -1,0 +1,22 @@
+package org.example.accountservice.kafka;
+
+import lombok.extern.slf4j.Slf4j;
+import org.example.accountservice.service.AccountService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.stereotype.Service;
+
+@Service
+@Slf4j
+public class AccountKafkaConsumer {
+
+    @Autowired
+    private AccountService accountService;
+
+    @KafkaListener(topics = "cards-events", groupId = "account-id")
+    public void consumeCardCreatedEvent(String message)
+    {
+
+    }
+}

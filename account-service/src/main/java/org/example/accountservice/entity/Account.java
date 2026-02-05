@@ -18,6 +18,8 @@ public class Account {
     private String name;
     private String email;
     private Integer solde;
+    private Integer nb_loans;
+    private Integer nb_card;
 
     public Long getId() {
         return id;
@@ -49,5 +51,18 @@ public class Account {
 
     public void setSolde(Integer solde) {
         this.solde = solde;
+    }
+
+    public Integer getNb_loans() {
+        return nb_loans;
+    }
+    public void setNb_loans(Integer nb_loans) {
+        this.nb_loans = nb_loans;
+    }
+    public Integer getNb_card() {
+        return nb_card;
+    }
+    public void setNb_card(Integer nb_card) {
+        this.nb_card = nb_card;
     }
 }
